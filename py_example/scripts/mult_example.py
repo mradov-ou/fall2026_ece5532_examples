@@ -1,9 +1,22 @@
 #! /usr/bin/python3
 
+import sys
+
 if __name__ == '__main__':
-    # TODO: Print each argument to the terminal
+    # Print each argument to the terminal
+    print('Argument list:')
+    for arg in sys.argv:
+        print(arg)
 
-    # TODO: Make sure the user passes two values to be multiplied
+    # Make sure the user passes two values to be multiplied
+    if len(sys.argv) != 3:
+        print('Incorrect number of arguments')
+        sys.exit(1)
 
-    # TODO: Parse input values, perform multiplication, and print the result
-    pass
+    # Parse input values, perform multiplication, and print the result
+
+    a = int(sys.argv[1])
+    b = int(sys.argv[2])
+
+    c = a * b
+    print(f'Result: {c}')
