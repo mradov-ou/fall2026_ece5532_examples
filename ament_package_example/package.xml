@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>ament_package_example</name>
+  <version>0.0.0</version>
+  <description>
+    Example usage of ament_cmake without ament_cmake_auto
+  </description>
+  <maintainer email="mtradovn@oakland.edu">Micho Radovnikovich</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>basic_ros_example</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
