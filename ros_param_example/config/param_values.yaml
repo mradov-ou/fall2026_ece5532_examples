@@ -1,0 +1,5 @@
+/**:
+  ros__parameters:
+    float_param: -5.0
+    bool_param: true
+    string_param: foo_bar

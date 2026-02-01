@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- TODO: Load parameters for the node from a YAML file -->
+    <node pkg="ros_param_example" exec="param_example" name="param_example" output="screen" />
+
+</launch>

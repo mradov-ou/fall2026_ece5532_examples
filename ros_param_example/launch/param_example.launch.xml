@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- TODO: Set parameter values for the node -->
+    <node pkg="ros_param_example" exec="param_example" name="param_example" output="screen" />
+
+</launch>
