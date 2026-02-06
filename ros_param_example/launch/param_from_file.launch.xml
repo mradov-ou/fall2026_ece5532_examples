@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
-    <!-- TODO: Load parameters for the node from a YAML file -->
-    <node pkg="ros_param_example" exec="param_example" name="param_example" output="screen" />
+    <node pkg="ros_param_example" exec="param_example" name="param_example" output="screen">
+        <param from="$(find-pkg-share ros_param_example)/config/param_values.yaml" />
+    </node>
 
 </launch>

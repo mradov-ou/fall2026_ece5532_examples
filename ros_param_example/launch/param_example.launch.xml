@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <launch>
 
-    <!-- TODO: Set parameter values for the node -->
-    <node pkg="ros_param_example" exec="param_example" name="param_example" output="screen" />
+    <node pkg="ros_param_example" exec="param_example.py" name="param_example" output="screen">
+        <param name="float_param" value="20.0" />
+        <param name="bool_param" value="false" />
+        <param name="string_param" value="foo_bar" />
+    </node>
 
 </launch>
