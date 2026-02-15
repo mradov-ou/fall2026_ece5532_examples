@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>sparkfun_imu_driver</name>
+  <version>0.0.0</version>
+  <description>
+    Driver node for parsing the default serial output stream from an OpenLog Artemis IMU: https://www.sparkfun.com/products/16832
+  </description>
+  <maintainer email="mtradovn@oakland.edu">Micho Radovnikovich</maintainer>
+  <license>BSD</license>
+
+  <exec_depend>python3-serial</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
