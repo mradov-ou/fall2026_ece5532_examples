@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="rosbag_example" exec="time_analysis_node" name="time_analysis_node">
+        <param name="use_sim_time" value="false" />
+    </node>
+
+</launch>
