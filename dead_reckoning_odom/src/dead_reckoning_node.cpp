@@ -2,6 +2,7 @@
 #include <tf2_ros/transform_broadcaster.h>
 #include <geometry_msgs/msg/twist_stamped.hpp>
 #include <nav_msgs/msg/odometry.hpp>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
 namespace dead_reckoning_odom {
 
@@ -36,17 +37,52 @@ namespace dead_reckoning_odom {
       double y_;     // Y position
       double psi_;   // Heading angle
 
+      rclcpp::Time last_twist_time_;
+
       void recv_twist(const geometry_msgs::msg::TwistStamped::ConstSharedPtr msg) {
-        // TODO: Compute time difference from the last time a twist message was received
+        // Compute time difference from the last time a twist message was received
+        rclcpp::Time current_time = msg->header.stamp;
+        if (last_twist_time_.nanoseconds() == 0) {
+          last_twist_time_ = current_time;
+          return;
+        }
+        double ts = (current_time - last_twist_time_).seconds();
+        last_twist_time_ = current_time;
 
-        // TODO: Integrate discrete vehicle state space model one step with the measured
+        // Integrate discrete vehicle state space model one step with the measured
         //     time difference and the latest speed and yaw rate data
+        x_ += ts * msg->twist.linear.x * cos(psi_);
+        y_ += ts * msg->twist.linear.x * sin(psi_);
+        psi_ += ts * msg->twist.angular.z;
 
-        // TODO: Copy dead reckoning position and orientation estimate into transform message
+        // Copy dead reckoning position and orientation estimate into transform message
+        geometry_msgs::msg::TransformStamped transform_msg;
+        transform_msg.header.stamp = current_time;
+        transform_msg.header.frame_id = parent_frame_;
+        transform_msg.child_frame_id = child_frame_;
+        transform_msg.transform.translation.x = x_;
+        transform_msg.transform.translation.y = y_;
 
-        // TODO: Broadcast TF frame from world to base_footprint
+        tf2::Quaternion q;
+        q.setRPY(0, 0, psi_);
+        transform_msg.transform.rotation.w = q.w();
+        transform_msg.transform.rotation.x = q.x();
+        transform_msg.transform.rotation.y = q.y();
+        transform_msg.transform.rotation.z = q.z();
 
-        // TODO: Publish odometry message with the latest dead reckoning estimate
+        // Broadcast TF frame from world to base_footprint
+        tf_broadcaster_->sendTransform(transform_msg);
+
+        // Publish odometry message with the latest dead reckoning estimate
+        nav_msgs::msg::Odometry odom_msg;
+        odom_msg.header.stamp = current_time;
+        odom_msg.header.frame_id = parent_frame_;
+        odom_msg.child_frame_id = child_frame_;
+        odom_msg.pose.pose.position.x = x_;
+        odom_msg.pose.pose.position.y = y_;
+        odom_msg.pose.pose.orientation = transform_msg.transform.rotation;
+        odom_msg.twist.twist = msg->twist;
+        pub_odom_->publish(odom_msg);
       }
   };
 }

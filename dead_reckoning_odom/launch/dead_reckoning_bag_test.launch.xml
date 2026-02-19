@@ -3,7 +3,7 @@
 
     <node pkg="dead_reckoning_odom" exec="dead_reckoning_odom" name="dead_reckoning_odom">
         <param name="parent_frame" value="world" />
-        <param name="initial_heading_deg" value="0.0" />
+        <param name="initial_heading_deg" value="-90.0" />
         <param name="use_sim_time" value="true" />
     </node>
 
