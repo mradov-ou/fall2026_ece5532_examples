@@ -4,6 +4,6 @@ slam_toolbox:
     odom_frame: odom
     map_frame: map
     base_frame: base_footprint
-    scan_topic: /scan
+    scan_topic: /laser_birdcage_r2000/scan
     map_update_interval: 2.0
     map_start_pose: [0.0, 0.0, 0.0]

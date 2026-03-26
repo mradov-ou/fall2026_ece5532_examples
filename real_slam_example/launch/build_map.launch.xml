@@ -4,7 +4,7 @@
         <param name="use_sim_time" value="true"/>
         <param name="mode" value="localization"/>
         <param name="map_file_name" value="$(find-pkg-share real_slam_example)/map"/>
-        <!-- TODO: Load parameters from config file -->
+        <param from="$(find-pkg-share real_slam_example)/config/slam_toolbox_params.yaml"/>
     </node>
 
     <node pkg="nav2_lifecycle_manager" exec="lifecycle_manager" name="lifecycle_manager_localization" output="screen">
@@ -17,7 +17,14 @@
     <node pkg="tf2_ros" exec="static_transform_publisher" name="base_to_laser"
         args="--x 0 --y 0 --z 0.25 --roll 0 --pitch 0 --yaw 0 --frame-id base_footprint --child-frame-id laser_birdcage_r2000" />
 
-    <!-- TODO: Run and configure dead reckoning odometry node to assist SLAM -->
+    <!-- Run and configure dead reckoning odometry node to assist SLAM -->
+    <node pkg="dead_reckoning_odom" exec="dead_reckoning_odom" name="dead_reckoning_odom">
+        <param name="parent_frame" value="odom" />
+        <param name="use_sim_time" value="true" />
+        <param name="support_lat_vel" value="true" />
+
+        <remap from="twist" to="/mobility_base/twist" />
+    </node>
 
     <!-- Rviz -->
     <node pkg="rviz2" exec="rviz2" name="rviz2" args="-d $(find-pkg-share real_slam_example)/rviz/build_map.rviz">

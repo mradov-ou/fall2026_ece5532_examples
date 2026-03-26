@@ -16,6 +16,7 @@ namespace dead_reckoning_odom {
         x_ = declare_parameter<double>("initial_x", 0.0);
         y_ = declare_parameter<double>("initial_y", 0.0);
         psi_ = declare_parameter<double>("initial_heading_deg", 0.0) * M_PI / 180.0;
+        support_lat_vel_ = declare_parameter<bool>("support_lat_vel", false);
 
         tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
         sub_twist_ = create_subscription<geometry_msgs::msg::TwistStamped>("twist", 1, std::bind(&DeadReckoning::recv_twist, this, std::placeholders::_1));
@@ -38,6 +39,7 @@ namespace dead_reckoning_odom {
       double psi_;   // Heading angle
 
       rclcpp::Time last_twist_time_;
+      bool support_lat_vel_;
 
       void recv_twist(const geometry_msgs::msg::TwistStamped::ConstSharedPtr msg) {
         // Compute time difference from the last time a twist message was received
@@ -51,8 +53,13 @@ namespace dead_reckoning_odom {
 
         // Integrate discrete vehicle state space model one step with the measured
         //     time difference and the latest speed and yaw rate data
-        x_ += ts * msg->twist.linear.x * cos(psi_);
-        y_ += ts * msg->twist.linear.x * sin(psi_);
+        if (support_lat_vel_) {
+          x_ += ts * (msg->twist.linear.x * cos(psi_) - msg->twist.linear.y * sin(psi_));
+          y_ += ts * (msg->twist.linear.x * sin(psi_) + msg->twist.linear.y * cos(psi_));
+        } else {
+          x_ += ts * msg->twist.linear.x * cos(psi_);
+          y_ += ts * msg->twist.linear.x * sin(psi_);
+        }
         psi_ += ts * msg->twist.angular.z;
 
         // Copy dead reckoning position and orientation estimate into transform message
