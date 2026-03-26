@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<launch>
+    <node pkg="slam_toolbox" exec="async_slam_toolbox_node" name="slam_toolbox" output="screen">
+        <param name="use_sim_time" value="true"/>
+        <param name="mode" value="localization"/>
+        <param name="map_file_name" value="$(find-pkg-share real_slam_example)/map"/>
+        <!-- TODO: Load parameters from config file -->
+    </node>
+
+    <node pkg="nav2_lifecycle_manager" exec="lifecycle_manager" name="lifecycle_manager_localization" output="screen">
+        <param name="use_sim_time" value="true"/>
+        <param name="autostart"    value="true"/>
+        <param name="node_names" value="[slam_toolbox]"/>
+    </node>
+
+    <!-- Transform from footprint to laser frame -->
+    <node pkg="tf2_ros" exec="static_transform_publisher" name="base_to_laser"
+        args="--x 0 --y 0 --z 0.25 --roll 0 --pitch 0 --yaw 0 --frame-id base_footprint --child-frame-id laser_birdcage_r2000" />
+
+    <!-- TODO: Run and configure dead reckoning odometry node to assist SLAM -->
+
+    <!-- Rviz -->
+    <node pkg="rviz2" exec="rviz2" name="rviz2" args="-d $(find-pkg-share real_slam_example)/rviz/build_map.rviz">
+        <param name="use_sim_time" value="true" />
+    </node>
+</launch>

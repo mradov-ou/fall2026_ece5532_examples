@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>maze_nav_example</name>
+  <version>0.0.0</version>
+  <description>
+    ROS 2 navigation stack configuration and launch files for navigating in the roundbot_maze Gazebo world.
+  </description>
+  <maintainer email="mtradovn@oakland.edu">Micho Radovnikovich</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Simulation infrastructure -->
+  <exec_depend>ece5532_gazebo</exec_depend>
+  <exec_depend>roundbot_description</exec_depend>
+  <exec_depend>roundbot_gazebo</exec_depend>
+
+  <!-- Odometry -->
+  <exec_depend>dead_reckoning_odom</exec_depend>
+
+  <!-- Navigation stack -->
+  <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>nav2_bt_navigator</exec_depend>
+  <exec_depend>nav2_controller</exec_depend>
+  <exec_depend>nav2_planner</exec_depend>
+  <exec_depend>nav2_behaviors</exec_depend>
+  <exec_depend>nav2_smoother</exec_depend>
+  <exec_depend>nav2_velocity_smoother</exec_depend>
+  <exec_depend>nav2_waypoint_follower</exec_depend>
+  <exec_depend>nav2_lifecycle_manager</exec_depend>
+  <exec_depend>nav2_costmap_2d</exec_depend>
+  <exec_depend>nav2_navfn_planner</exec_depend>
+  <exec_depend>nav2_dwb_controller</exec_depend>
+
+  <!-- Localization -->
+  <exec_depend>slam_toolbox</exec_depend>
+  <exec_depend>nav2_amcl</exec_depend>
+
+  <!-- Visualisation -->
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>nav2_rviz_plugins</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
