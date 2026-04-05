@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <node pkg="opencv_example" exec="hough_transform_node" name="hough_transform_node" output="screen">
+    <param from="$(find-pkg-share opencv_example)/config/hough_transform_params.yaml" />
+  </node>
+
+  <!-- Decompress image from bag file -->
+  <node pkg="image_transport" exec="republish">
+    <param name="in_transport" value="compressed" />
+    <param name="out_transport" value="raw" />
+    <remap from="in/compressed" to="/image/compressed" />
+    <remap from="out" to="/image" />
+  </node>
+
+  <node pkg="rqt_reconfigure" exec="rqt_reconfigure" />
+
+</launch>
