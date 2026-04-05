@@ -1,10 +1,10 @@
 /**:
   ros__parameters:
-    blue_thres: 130
-    erode_size: 1
-    dilate_size: 1
+    blue_thres: 180
+    erode_size: 5
+    dilate_size: 5
     hough_rho_res: 10
     hough_theta_res: 0.05
     hough_threshold: 10
-    hough_min_length: 20
+    hough_min_length: 150
     hough_max_gap: 50
