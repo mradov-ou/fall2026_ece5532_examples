@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>imu_ekf_example</name>
+  <version>0.0.0</version>
+  <description>
+    Example implementation of an extended Kalman filter for estimating the orientation of an IMU.
+  </description>
+  <maintainer email="mtradovn@oakland.edu">Micho Radovnikovich</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>tf2_ros</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

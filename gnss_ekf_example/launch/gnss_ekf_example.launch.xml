@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node pkg="gnss_ekf_example" exec="gnss_ekf_example" name="gnss_ekf_example">
+    <param name="use_sim_time" value="true" />
+    <param name="ref_lat" value="42.6794081" />
+    <param name="ref_lon" value="-83.1956015" />
+    <param name="ref_alt" value="281.0" />
+  </node>
+
+  <node pkg="rviz2" exec="rviz2" name="ekf_viz" args="-d $(find-pkg-share gnss_ekf_example)/rviz/rviz_config.rviz">
+    <param name="use_sim_time" value="true" />
+  </node>
+
+  <!-- Transform from base_footprint to LIDAR frame -->
+  <node pkg="tf2_ros" exec="static_transform_publisher" name="footprint_to_lidar" args="--frame-id base_footprint --child-frame-id laser --x 0.17 --y 0 --z 0.22 --roll 0 --pitch 0 --yaw 0" />
+
+  <node pkg="rqt_reconfigure" exec="rqt_reconfigure" />
+
+</launch>

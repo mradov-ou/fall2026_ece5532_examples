@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="playback" default="true" />
+
+  <group unless="$(var playback)">
+    <node pkg="sparkfun_imu_driver" exec="driver_node" name="imu_driver" />
+  </group>
+
+  <node pkg="imu_ekf_example" exec="imu_ekf_example" name="imu_ekf_example">
+    <param name="use_sim_time" value="$(var playback)" />
+  </node>
+
+  <node pkg="rviz2" exec="rviz2" name="ekf_viz" args="-d $(find-pkg-share imu_ekf_example)/rviz/rviz_config.rviz">
+    <param name="use_sim_time" value="$(var playback)" />
+  </node>
+
+  <node pkg="rqt_reconfigure" exec="rqt_reconfigure" />
+
+</launch>
