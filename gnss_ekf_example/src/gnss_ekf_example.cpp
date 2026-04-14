@@ -203,7 +203,7 @@ namespace gnss_ekf_example {
         // Construct measurement covariance matrix
         Eigen::Matrix<double, 2, 2> R;
         R.row(0) << r_speed_ * r_speed_ , 0;
-        R.row(1) << 0, r_speed_ * r_speed_;
+        R.row(1) << 0, r_yaw_rate_ * r_yaw_rate_;
 
         // Compute Kalman gain
         Eigen::Matrix<double, 2, 2> S;

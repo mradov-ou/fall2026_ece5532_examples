@@ -23,10 +23,10 @@ namespace imu_ekf_example {
         X_ << 1.0, 0, 0, 0, 0, 0, 0;
         P_ = StateMatrix::Identity();
 
-        q_quat_ = declare_parameter<double>("q_quat", 1.0);
-        q_rate_ = declare_parameter<double>("q_rate", 1.0);
+        q_quat_ = declare_parameter<double>("q_quat", 0.01);
+        q_rate_ = declare_parameter<double>("q_rate", 0.1);
         r_accel_ = declare_parameter<double>("r_accel", 1.0);
-        r_gyro_ = declare_parameter<double>("r_gyro", 1.0);
+        r_gyro_ = declare_parameter<double>("r_gyro", 0.1);
         param_cb_ = add_on_set_parameters_callback(std::bind(&ImuEkf::param_update, this, std::placeholders::_1));
 
         Q_.setZero();
