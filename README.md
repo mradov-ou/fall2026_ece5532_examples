@@ -58,3 +58,22 @@ sudo snap install --classic code
 ```
 To help with writing code for ROS 2, it is recommended to install the "Robot Developer Extensions for ROS 2" VS Code extension.
 To install this, open VS Code, click Extensions on the left side panel, and search for "ROS".
+
+### Set Up GitHub CLI
+
+The homework submission process uses a third-party tool connected to GitHub called Classroom50, which uses GitHub CLI to automate some of the submission procedure.
+The base GitHub CLI tool `gh` is installed by the `ece5532_software_setup.bash` script, but further setup steps are needed to use it properly for the course.
+
+1. Get a token with your GitHub credentials through browser OAuth
+
+```
+gh auth login --hostname github.com --git-protocol https --web --scopes "admin:org,read:org,repo,workflow"
+```
+After following the prompts to open a web browser, enter the one-time-code, and then authorize access, the terminal should show that you are logged in with your GitHub username.
+
+
+2. Install the Classroom50 student extension
+
+```
+gh extension install foundation50/gh-student
+```
