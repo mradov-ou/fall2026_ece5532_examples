@@ -27,13 +27,13 @@ To install natively:
 - Install Ubuntu! This step depends on whether you're installing on a separate partition or on the entire hard drive. If you want to install Ubuntu next to Windows, you can use the Windows disk management utility to resize your existing Windows installation and create a new, second partition. Ubuntu can then be installed on this new partition. However, be careful when doing this, and back up any important files just in case something happens to your original Windows installation.
 
 To set up a virtual machine:
-- Download and install VMWare player for Windows from [here](https://1drv.ms/u/s!Ar6id-4c-fy31Qs6W53MPME0j493).
+- Download and install VMWare player for Windows from [here](https://files.mradov.org/VMware-player-full-17.5.0-22583795.exe).
 - Create a VM by following along with this walkthrough video: [https://youtu.be/f9v6WJ6tTkI](https://youtu.be/f9v6WJ6tTkI).
 
 ### Software Setup
 
 Once the operating system is set up properly, it is time to set up the new OS installation for the course. To do this, first download the script that automates the software installation, and save it somewhere on your Ubuntu filesystem:
-[ece5532_software_setup.bash](https://1drv.ms/u/c/b7fcf91cee77a2be/IQBZNGY8xeeNR4HZF7ojf3i5AbU7Q1NkFlgOsRfybN2p43s?e=gXTfPZ)
+[ece5532_software_setup.bash](https://files.mradov.org/ece5532_software_setup.bash)
 
 Then, open a terminal with `Ctrl-Alt-T`, `cd` to the location where `software_setup_ece5532.bash` is saved, and enter the following commands to first make the script executable, and then actually run it:
 
